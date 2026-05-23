@@ -4,34 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить пользователя</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/admin_header.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_btn.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_content.css}">
 </head>
 <body>
-    <div class="container">
+
+<header th:replace="~{fragment/header :: header}"></header>
+
+<main class="main-content">
+    <div class="page-header">
         <h1>Добавление пользователя</h1>
-        <form method="post" th:action="@{/users/save}" th:object="${user}">
+    </div>
+
+    <section class="content-card">
+        <form class="admin-form" method="post" th:action="@{/users/save}" th:object="${user}">
             <input type="hidden" th:field="*{id}">
+
             <div class="form-group">
-                <input type="text" th:field="*{name}" name="name" placeholder="Имя" required>
+                <label for="name">Имя</label>
+                <input id="name" type="text" th:field="*{name}" name="name" placeholder="Имя" required>
             </div>
+
             <div class="form-group">
-                <input type="text" th:field="*{surname}" name="surname" placeholder="Фамилия" required>
+                <label for="surname">Фамилия</label>
+                <input id="surname" type="text" th:field="*{surname}" name="surname" placeholder="Фамилия" required>
             </div>
+
             <div class="form-group">
-                <input type="text" th:field="*{phone}" name="phone" placeholder="Телефон" required>
+                <label for="phone">Телефон</label>
+                <input id="phone" type="text" th:field="*{phone}" name="phone" placeholder="Телефон" required>
             </div>
+
             <div class="form-group">
-                <input type="email" th:field="*{email}" name="email" placeholder="Эл. почта" required>
+                <label for="email">Эл. почта</label>
+                <input id="email" type="email" th:field="*{email}" name="email" placeholder="Эл. почта" required>
             </div>
+
             <div class="form-group">
-                <input type="password" th:field="*{password}" name="password" placeholder="Пароль" required>
+                <label for="password">Пароль</label>
+                <input id="password" type="password" th:field="*{password}" name="password" placeholder="Пароль" required>
             </div>
-            <button type="submit" class="btn">Сохранить</button>
-            <div class="button-group">
-                <a href="/users" class="btn">Вернуться к списку</a>
-                <a href="/" class="btn">На главную</a>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-add">Сохранить</button>
             </div>
         </form>
-    </div>
+    </section>
+</main>
+<div th:replace="~{fragment/footer :: footer}"></div>
+
 </body>
 </html>

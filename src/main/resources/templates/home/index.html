@@ -1,23 +1,57 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>АвтоМастер — Автосервис</title>
+     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-    <div class="container">
-        <h1>Главная</h1>
-        <div class="nav-links">
-            <a href="/users" class="btn">Пользователи</a>
-            <a href="/items" class="btn">Услуги</a>
-            <a href="/locations" class="btn">Адреса</a>
-            <a href="/online" class="btn">Записаться</a>
-            <a href="/upload" class="btn">Загрузить изображение</a>
-            <a href="/gallery" class="btn">Показать изображения</a>
-            <a href="/booking" class="btn">Список заявок</a>
+
+<header>
+    <div class="logo">Авто<span>Мастер</span></div>
+    <nav>
+        <a href="#services" class="btn">Записаться</a>
+    </nav>
+</header>
+
+<section class="about">
+    <h1>Профессиональный автосервис</h1>
+    <p>
+        Обслуживание автомобилей любых марок.
+        Современное оборудование, опытные мастера,
+        прозрачные цены и онлайн-запись за пару минут.
+    </p>
+</section>
+
+<section class="services" id="services">
+
+    <div class="card" th:each="usluga : ${items}">
+
+        <img th:if="${usluga.cover == null}"
+             src="/images/512.png"
+             th:alt="${usluga.title}">
+
+        <img th:if="${usluga.cover != null}"
+             th:src="${usluga.cover}"
+             th:alt="${usluga.title}">
+
+        <div class="card-body">
+            <h3 th:text="${usluga.title}"></h3>
+            <p th:text="${usluga.info}"></p>
+            <div class="card-footer">
+                <span class="price" th:text="|${usluga.price} ₽|"></span>
+                <a th:href="@{/online/{id}(id=${usluga.id})}" class="btn">Записаться</a>
+            </div>
         </div>
+
     </div>
+
+</section>
+
+<footer>
+    <p>© 2026 <span>АвтоМастер</span>. Все права защищены.</p>
+</footer>
+
 </body>
 </html>

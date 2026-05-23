@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.freelance.booking.Models.Images;
 import edu.freelance.booking.Repositories.ImageRepository;
+import edu.freelance.booking.Utils.ImageUtil;
 
 @Controller
 public class ImageController {
@@ -31,28 +32,16 @@ public class ImageController {
     //Прием и сохранение картинки
     public String uploadImage(@RequestParam("title") String title, 
                               @RequestParam("picture") MultipartFile imageFile) {
-        try {
-            String uploadPath = "src/main/resources/static/images";
-            Path uploadDir = Paths.get(uploadPath);
-            if(!Files.exists(uploadDir)) {
-                Files.createDirectories(uploadDir);
-            }
+            
+        ImageUtil util = new ImageUtil();
+        String newFilename = util.UploadImage(imageFile);
 
-           //String filename = imageFile.getOriginalFilename();
-           String ext = imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().lastIndexOf("."));
-           String newFilename = UUID.randomUUID().toString() + ext; 
-           Path targetPath = uploadDir.resolve(newFilename);
-            imageFile.transferTo(targetPath);
+        Images img = new Images();
+        img.setTitle(title);
+        img.setFilename(newFilename);
+        imageRepository.save(img);
 
-            Images img = new Images();
-            img.setTitle(title);
-            img.setFilename(newFilename);
-            imageRepository.save(img);
-
-        } catch (IOException e) {
-
-        }
-        return "redirect:/upload";
+         return "redirect:/upload";
     }
 
     @GetMapping("/upload")

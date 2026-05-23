@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список услуг</title>
+</head>
+<body>
+    <header >
+    <a href="/" target="_blank">Главная</a>
+    <a href="/items" class="btn">Услуги</a>
+    <a href="/locations" class="btn">Адреса</a>
+    <a href="/booking" class="btn">Список заявок</a>
+    <a href="/users" class="btn">Пользователи</a>
+    </header>
+
+    <main>
+        <div th:replace="${content}">Основной контент</div>
+    </main>
+<footer></footer>
+</body>
+</html>

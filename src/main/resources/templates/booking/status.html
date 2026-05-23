@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Статус заявки</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-    <div class="container">
+      <header>
+    <div class="logo">Авто<span>Мастер</span></div>
+    <a href="/" class="back-link">← На главную</a>
+  </header>
+  
         <h1>Заявка №<span th:text="${booking.id}"></span></h1>
         <p>Статус: 
             <strong>
@@ -27,9 +30,5 @@
                 <span th:if="!${booking.approved}">⏳ Ожидает подтверждения</span>
             </strong>
         </p>
-        <div class="button-group">
-            <a href="/" class="btn">На главную</a>
-        </div>
-    </div>
 </body>
 </html>

@@ -4,28 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить автосервис</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/admin_header.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_btn.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_content.css}">
 </head>
 <body>
-    <div class="container">
+    
+<header th:replace="~{fragment/header :: header}"></header>
+
+<main class="main-content">
+    <div class="page-header">
         <h1>Добавление автосервиса</h1>
-        <form method="post" th:action="@{/locations/save}" th:object="${location}">
+    </div>
+
+    <section class="content-card">
+        <form class="admin-form" method="post" th:action="@{/locations/save}" th:object="${location}">
             <input type="hidden" th:field="*{id}">
+
             <div class="form-group">
-                <input type="text" th:field="*{city}" name="city" placeholder="Город" required>
+                <label for="city">Город</label>
+                <input id="city" type="text" th:field="*{city}" name="city" placeholder="Город" required>
             </div>
+
             <div class="form-group">
-                <input type="text" th:field="*{street}" name="street" placeholder="Улица" required>
+                <label for="street">Улица</label>
+                <input id="street" type="text" th:field="*{street}" name="street" placeholder="Улица" required>
             </div>
+
             <div class="form-group">
-                <input type="text" th:field="*{house}" name="house" placeholder="№ Дома" required>
+                <label for="house">№ Дома</label>
+                <input id="house" type="text" th:field="*{house}" name="house" placeholder="№ Дома" required>
             </div>
-            <button type="submit" class="btn">Сохранить</button>
-            <div class="button-group">
-                <a class="btn" th:href="@{/locations}">Вернуться к списку</a>
-                <a href="/" class="btn">На главную</a>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-add">Сохранить</button>
+                <a th:href="@{/locations}" class="btn btn-add">Вернуться к списку</a>
             </div>
         </form>
-    </div>
+    </section>
+</main>
+<div th:replace="~{fragment/footer :: footer}"></div>
+
 </body>
 </html>

@@ -7,12 +7,12 @@
             <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-    <div class="container">
+      <header th:replace="fragment/header :: header"></header>
+  
         <h1>Каталог изображений</h1>
         <div th:each="pic : ${pictures}">
             <img th:src="|images/${pic.filename}|">
         </div>
         <a href="/" class="btn">На главную</a>
-    </div>
 </body>
 </html>

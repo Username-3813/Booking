@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background-color: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+header a:hover {
+    background-color: #374151;
+}
+
+header a:active {
+    background-color: #111827;
+}

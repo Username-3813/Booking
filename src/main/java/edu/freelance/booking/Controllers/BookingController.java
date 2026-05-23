@@ -42,7 +42,6 @@ public class BookingController {
         booking.setApproved(true);
         booking.setStatus(Status.PROCESS);
         bookingRepository.save(booking);
-
         return "redirect:/booking";
     }
 
@@ -55,14 +54,15 @@ public class BookingController {
         return "redirect:/booking";
     }
 
-    @GetMapping("/online")
-    public String booking (Model data) {
-        List<Item> items = itemRepository.findAll();
+    @GetMapping("/online/{id}")
+    public String booking (@PathVariable Long id, Model data) {
+        List<Item> items = itemRepository.findByActiveTrue();
         List<Location> locations = locationRepository.findAll();
         data.addAttribute("items", items);
         data.addAttribute("locations", locations);
         data.addAttribute("minDate", LocalDate.now().toString());
         data.addAttribute("booking", new Booking());
+        data.addAttribute("selectedId", id);
         return "booking/create";
     }
 

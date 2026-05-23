@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список пользователей</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/admin_header.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_btn.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_content.css}">
 </head>
 <body>
-    <div class="container">
+
+<header th:replace="~{fragment/header :: header}"></header>
+
+<main class="main-content">
+    <div class="page-header">
         <h1>Список пользователей</h1>
-        <div class="button-group">
-            <a href="/users/add" class="btn">Добавить пользователя</a>
-            <a href="/" class="btn">На главную</a>
-        </div>
-        <table>
+        <a th:href="@{/users/add}" class="btn btn-primary">Добавить пользователя</a>
+    </div>
+
+    <section class="content-card">
+        <table class="admin-table">
             <thead>
                 <tr>
                     <th>Фамилия</th>
@@ -23,19 +30,35 @@
                     <th>Действие</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.surname}"></td>
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.phone}"></td>
                     <td th:text="${user.email}"></td>
+
                     <td class="table-actions">
-                        <a th:href="|/users/edit/${user.id}|" class="btn btn-edit btn-icon" title="Редактировать">✏️</a>
-                        <a th:href="|/users/delete/${user.id}|" class="btn btn-danger btn-icon" title="Удалить">🗑️</a>
+                        <a th:href="|/users/edit/${user.id}|"
+                           class="btn btn-edit btn-icon"
+                           title="Редактировать">
+                            ✏️
+                        </a>
+
+                        <a th:href="|/users/delete/${user.id}|"
+                           class="btn btn-delete btn-icon"
+                           title="Удалить"
+                           onclick="return confirm('Удалить пользователя?');">
+                            🗑️
+                        </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
+    </section>
+</main>
+
+<div th:replace="~{fragment/footer :: footer}"></div>
+
 </body>
 </html>
